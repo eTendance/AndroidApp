@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">eTendance</string>
+    <string name="action_settings">Settings</string>
+    <string name="etendance">eTendance</string>
+    <string name="log_in">Sign In</string>
+    <string name="user_hint">Username</string>
+    <string name="pass_hint">Password</string>
+
+</resources>
