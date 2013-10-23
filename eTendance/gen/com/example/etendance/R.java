@@ -24,7 +24,10 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f080000;
+        public static final int action_settings=0x7f080003;
+        public static final int password=0x7f080001;
+        public static final int sign_in=0x7f080002;
+        public static final int username=0x7f080000;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
@@ -37,6 +40,7 @@ public final class R {
         public static final int app_name=0x7f050000;
         public static final int etendance=0x7f050002;
         public static final int log_in=0x7f050003;
+        public static final int login_dialog_test=0x7f050006;
         public static final int pass_hint=0x7f050005;
         public static final int user_hint=0x7f050004;
     }

@@ -17,21 +17,24 @@
         android:textSize="40sp"
         android:layout_marginTop="40dp"
         android:layout_marginBottom="60dp" />
-    <EditText
+    
+    <EditText android:id="@+id/username"
         android:inputType="text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
         android:hint="@string/user_hint"
         android:maxLength="16" />
-    <EditText
+    
+    <EditText android:id="@+id/password"
         android:inputType="textPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="80dp"
         android:hint="@string/pass_hint"
         android:maxLength="16" />
-    <Button 
+    
+    <Button android:id = "@+id/sign_in"
         android:text="@string/log_in"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

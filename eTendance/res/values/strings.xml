@@ -7,5 +7,7 @@
     <string name="log_in">Sign In</string>
     <string name="user_hint">Username</string>
     <string name="pass_hint">Password</string>
-
+    <string name="login_dialog_test">You have submitted the form!</string>
+    
+    
 </resources>
