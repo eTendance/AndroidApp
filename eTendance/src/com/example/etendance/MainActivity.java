@@ -231,19 +231,34 @@ public class MainActivity extends Activity implements OnClickListener{
     
     @Override
 	public void onClick(View v) {
-		if (v == sign_in){
-			String[] information = {userField.getText().toString(), passField.getText().toString()};
-			if (information[0].length()==0 || information[0]==null){
-				return;
-			}
-			if(information[1].length()==0 || information[1]==null){
-				return;
-			}
-			else if (!(information[0].length()==0 || information[0]==null)){
-				new SignInThread().execute(information);
-				return;
-			}
-		}
+		if(v == sign_in) {
+			String tempUser = userField.getText().toString();
+			String tempPass = passField.getText().toString();
+			
+			if((tempUser.length() < 8)||(tempUser.length() > 16)) {
+				Toast.makeText(getApplicationContext(),
+						"Invalid username length", Toast.LENGTH_SHORT)
+						.show();
+			}//invalid username length
+			else if((tempPass.length() < 8)||(tempPass.length() > 16)) {
+				Toast.makeText(getApplicationContext(),
+						"Invalid password length", Toast.LENGTH_SHORT)
+						.show();
+			}//invalid password length
+			else {
+				String[] information = {tempUser, tempPass};
+				if (information[0].length()==0 || information[0]==null){
+					return;
+				}
+				if(information[1].length()==0 || information[1]==null){
+					return;
+				}
+				else if (!(information[0].length()==0 || information[0]==null)){
+					new SignInThread().execute(information);
+					return;
+				}
+			}//no errors in input
+		}//view v = sign in
 		return;
 		
 	}
@@ -268,7 +283,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		i.putExtras(b);
 		i.putExtra("AlreadyRunning", running);
 		startActivityForResult(i,0);
-		//overridePendingTransition(R.anim.right_slide_out, R.anim.right_slide_in);
 	}
 	
 	
