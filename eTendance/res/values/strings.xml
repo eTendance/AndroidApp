@@ -7,7 +7,8 @@
     <string name="log_in">Sign In</string>
     <string name="user_hint">Username</string>
     <string name="pass_hint">Password</string>
-    <string name="login_dialog_test">You have submitted the form!</string>
-    
+    <string name="check_in">Check In</string>
+    <string name="log_out">Log Out</string>
+    <string name="class_placeholder">Class Pending</string>
     
 </resources>
