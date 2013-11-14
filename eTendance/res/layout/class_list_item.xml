@@ -13,7 +13,7 @@
 	        android:layout_width="0dp"
 	        android:layout_height="wrap_content"
 	        android:text="@string/class_placeholder"
-	        android:textSize="30sp"
+	        android:textSize="25sp"
 	        android:layout_weight="1"
 	        android:paddingTop="10dp" />
     </LinearLayout>
