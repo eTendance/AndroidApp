@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener{
 	
+	//used for testing and debugging purposes
 	static String LOGNAME = "main_activity";
 	
 	public static class storeInfo implements Parcelable{

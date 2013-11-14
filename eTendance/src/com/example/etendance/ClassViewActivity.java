@@ -33,6 +33,9 @@ import com.example.etendance.MainActivity.storeInfo;
 
 public class ClassViewActivity extends Activity implements OnClickListener{
 	
+	//used for testing and debugging purposes
+	static String LOGNAME = "classview_activity";
+	
 	private class ClassListFiller extends AsyncTask<Void, Void, ArrayList<storeInfo>> {
 		
 		@Override
@@ -230,7 +233,9 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 		classList.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				TextView tmp = (TextView) view.findViewById(R.id.class_list_item_name);
+				TextView clickedClass = (TextView) view.findViewById(R.id.class_list_item_name);
+				String tempClick = clickedClass.getText().toString();
+				Toast.makeText(getApplicationContext(), "You have clicked " + clickedClass, Toast.LENGTH_SHORT).show();
 				//call viewAttendance() method
 			}
 		});

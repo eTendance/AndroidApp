@@ -14,15 +14,21 @@
         android:text="@string/log_out"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="right" />
+        android:layout_gravity="right"
+        android:layout_marginBottom="10dp" />
     
     <Button android:id="@+id/check_in"
 	    android:text="@string/check_in"
-	    android:layout_width="wrap_content"
+	    android:layout_width="175dp"
 	    android:layout_height="wrap_content"
-	    android:layout_gravity="center" />
+	    android:layout_gravity="center"
+	    android:layout_marginBottom="20dp" />
     
-
+    <View android:id="@+id/classview_divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" />
+    
 	<ListView android:id="@+id/class_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
