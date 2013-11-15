@@ -15,15 +15,19 @@
 	        android:text="@string/class_placeholder"
 	        android:textSize="25sp"
 	        android:layout_weight="3"
-	        android:paddingTop="10dp" />
+	        android:paddingTop="10dp"
+	        android:paddingBottom="5dp" />
 	    
 	    <ImageButton android:id="@+id/checkmark_button"
+	        android:contentDescription="@string/etendance"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_weight="1"
 	        android:layout_gravity="center_vertical"
 	        android:src="@drawable/clear_checkmark"
-	        android:background="@android:color/transparent" />
+	        android:background="@android:color/transparent"
+	        android:paddingTop="5dp"
+	        android:paddingBottom="5dp" />
     </LinearLayout>
     
     <View android:id="@+id/classes_divider"

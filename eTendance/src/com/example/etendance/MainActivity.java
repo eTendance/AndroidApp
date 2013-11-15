@@ -35,45 +35,11 @@ public class MainActivity extends Activity implements OnClickListener{
 	//used for testing and debugging purposes
 	static String LOGNAME = "main_activity";
 	
-	public static class storeInfo implements Parcelable{
-		public storeInfo(String id, String name) {
-			this.id=id;
-			this.name=name;
-		}
-		public storeInfo(Parcel in) {
-		    this.id=in.readString();
-		    this.name=in.readString();
-		            // and all other elements
-		}
-		String id;
-		String name;
-		@Override
-		public int describeContents() {
-			// TODO Auto-generated method stub
-			return 0;
-		}
-		@Override
-		public void writeToParcel(Parcel dest, int flags) {
-			// TODO Auto-generated method stub
-			dest.writeString(id);
-			dest.writeString(name);
-			
-		}
-		public static final Parcelable.Creator CREATOR = new Parcelable.Creator() 
-		{
-		    @Override
-			public storeInfo createFromParcel(Parcel in) { return new storeInfo(in); }
-		    @Override
-			public storeInfo[] newArray(int size) { return new storeInfo[size]; }
-		};
-	}
-
 	
-	
-    private class ClassListFiller extends AsyncTask<Void, Void, ArrayList<storeInfo>> {
+    private class ClassListFiller extends AsyncTask<Void, Void, ArrayList<StoreInfo>> {
 		
 		@Override
-		protected void onPostExecute(ArrayList<storeInfo> result){
+		protected void onPostExecute(ArrayList<StoreInfo> result){
 			if (result==null){
 				terminate(-1);
 			}
@@ -81,8 +47,8 @@ public class MainActivity extends Activity implements OnClickListener{
 			loadViewClasses();
 		}		
 		@Override
-		protected ArrayList<storeInfo> doInBackground(Void... v) {
-			ArrayList<storeInfo> classes = new ArrayList<storeInfo>();
+		protected ArrayList<StoreInfo> doInBackground(Void... v) {
+			ArrayList<StoreInfo> classes = new ArrayList<StoreInfo>();
 			
 			SharedPreferences settings = getSharedPreferences("LoginInfo",0);
 			String username = settings.getString("username","");
@@ -102,7 +68,7 @@ public class MainActivity extends Activity implements OnClickListener{
 					JSONArray classesArray = new JSONArray(text);
 					for (int i=0; i<classesArray.length(); i++){
 						JSONObject tmp = classesArray.getJSONObject(i);
-						classes.add(new storeInfo(tmp.getString("classid"), tmp.getString("name")));
+						classes.add(new StoreInfo(tmp.getString("classid"), tmp.getString("name")));
 					}
 				}
 			} catch (ClientProtocolException e) {
@@ -171,7 +137,7 @@ public class MainActivity extends Activity implements OnClickListener{
 	
 	Button sign_in;
 	EditText userField, passField;
-	ArrayList<storeInfo> classesInfo;
+	ArrayList<StoreInfo> classesInfo;
 	Boolean running;
 	
     @Override
@@ -184,7 +150,6 @@ public class MainActivity extends Activity implements OnClickListener{
 	    	String[] information = {username, password};
 	    	running=false;
 	    	new SignInThread().execute(information);
-	    	finish();
 	    }
 	    else{
 	    	running=true;

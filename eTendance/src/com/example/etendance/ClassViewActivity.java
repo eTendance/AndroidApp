@@ -29,17 +29,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
-import com.example.etendance.MainActivity.storeInfo;
 
 public class ClassViewActivity extends Activity implements OnClickListener{
 	
 	//used for testing and debugging purposes
 	static String LOGNAME = "classview_activity";
 	
-	private class ClassListFiller extends AsyncTask<Void, Void, ArrayList<storeInfo>> {
+	private class ClassListFiller extends AsyncTask<Void, Void, ArrayList<StoreInfo>> {
 		
 		@Override
-		protected void onPostExecute(ArrayList<storeInfo> result){
+		protected void onPostExecute(ArrayList<StoreInfo> result){
 			if (result==null){
 				terminate(-1);
 			}
@@ -47,8 +46,8 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 			displayClasses();
 		}		
 		@Override
-		protected ArrayList<storeInfo> doInBackground(Void... v) {
-			ArrayList<storeInfo> classes = new ArrayList<storeInfo>();
+		protected ArrayList<StoreInfo> doInBackground(Void... v) {
+			ArrayList<StoreInfo> classes = new ArrayList<StoreInfo>();
 			
 			SharedPreferences settings = getSharedPreferences("LoginInfo",0);
 			String username = settings.getString("username","");
@@ -66,12 +65,15 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 					if (text.equals("0")) {
 						return null;
 					}
+					else if(text.equals("2")) {
+						terminate(1);
+					}
 					
 					JSONArray classesArray = new JSONArray(text);
 					
 					for (int i = 0; i < classesArray.length(); i++) {
 						JSONObject tmp = classesArray.getJSONObject(i);
-						classes.add(new storeInfo(tmp.getString("classid"), tmp.getString("name")));
+						classes.add(new StoreInfo(tmp.getString("classid"), tmp.getString("name")));
 					}
 				}
 			} catch (ClientProtocolException e) {
@@ -94,7 +96,7 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 	ListView classList;
 	
 	ClassAdapter classAdapt;
-	ArrayList<storeInfo> classesInfo;
+	ArrayList<StoreInfo> classesInfo;
 	int classStatusFlag = 0;
 	String selectedTitle;
 	String selectedID;
@@ -127,7 +129,7 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 		displayClasses();
 	}
 
-	public void viewAttendance(ArrayList<storeInfo> result) {
+	public void viewAttendance(ArrayList<StoreInfo> result) {
 		// Method for transitioning to ViewAttendanceActivity
 		/*Bundle b = new Bundle();
 		
@@ -160,22 +162,39 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 					.show();
 			
 			//call displayClasses() again
+			displayClasses();
 		}
 		else{
-			if (flag!=3){
-				clearLoginInfo();
+			clearLoginInfo();
+			
+			if(flag == 3)
+			{
+				Intent returnToMainIntent = new Intent(this, MainActivity.class);
+	             returnToMainIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	             returnToMainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+	            startActivity(returnToMainIntent);
 			}
-			if (flag==1){
+			
+			
+			if(flag == 1) {
 				Toast.makeText(getApplicationContext(),
 						  "Login Credentials No Longer Valid", Toast.LENGTH_LONG)
 						  .show();
+				Intent badLoginIntent = new Intent(this, MainActivity.class);
+	             badLoginIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	             badLoginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+	            startActivity(badLoginIntent);
 			}
-			if (flag==0 && !getIntent().getBooleanExtra("AlreadyRunning", true)){
-				Intent intent1 = new Intent(this, MainActivity.class);
-	             intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	             intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
-	            startActivity(intent1);
+			
+			
+			if(flag == 0 && !getIntent().getBooleanExtra("AlreadyRunning", true)) {
+				Intent notRunningIntent = new Intent(this, MainActivity.class);
+	             notRunningIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	             notRunningIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);  
+	            startActivity(notRunningIntent);
 			}
+			
+			
 			Intent intent= getIntent(); 
 			intent.putExtra("AppStatus", flag);
 			setResult(Activity.RESULT_OK, intent);
@@ -227,18 +246,7 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 		classAdapt = new ClassAdapter(getBaseContext(), R.layout.class_list_item, R.id.class_list_item_name, classesInfo);
 		
 		// Assign adapter to ListView
-		classList.setAdapter(classAdapt); 
-		
-		//set click listeners on each class in the list
-		classList.setOnItemClickListener(new OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
-				TextView clickedClass = (TextView) view.findViewById(R.id.class_list_item_name);
-				String tempClick = clickedClass.getText().toString();
-				Toast.makeText(getApplicationContext(), "You have clicked " + clickedClass, Toast.LENGTH_SHORT).show();
-				//call viewAttendance() method
-			}
-		});
+		classList.setAdapter(classAdapt);
 	}
 
 }
