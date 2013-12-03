@@ -34,15 +34,15 @@ public class CheckInActivity extends Activity implements OnClickListener {
 			// TODO Auto-generated method stub
 			super.onPostExecute(result);
 			
-			if(result == "checkin_success") {
+			if(result.equals("1checkin_success\r\n")) {
 				//successful checkin
 				Toast.makeText(getApplicationContext(), R.string.success, Toast.LENGTH_LONG).show();
 			}
-			else if(result == "checkin_closed") {
+			else if(result.equals("checkin_closed\r\n")) {
 				//checkin pin expired/closed
 				Toast.makeText(getApplicationContext(), R.string.closed, Toast.LENGTH_LONG).show();
 			}
-			else if(result == "already_checked_in") {
+			else if(result.equals("already_checked_in\r\n")) {
 				//user already checked in for that session/class
 				Toast.makeText(getApplicationContext(), R.string.already_checked, Toast.LENGTH_LONG).show();
 			}
