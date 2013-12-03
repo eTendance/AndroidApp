@@ -10,5 +10,14 @@
     <string name="check_in">Check In</string>
     <string name="log_out">Log Out</string>
     <string name="class_placeholder">Class Pending</string>
+    <string name="back">Back</string>
+    <string name="qr_scan">Scan QR</string>
+    <string name="or">- OR -</string>
+    <string name="pin_hint">Enter PIN</string>
+    <string name="pin_submit">Submit</string>
+    <string name="success">Check In Successful</string>
+    <string name="closed">Check In Pin Expired/Closed</string>
+    <string name="already_checked">User Already Checked In</string>
+    <string name="request_error">Request Error</string>
     
 </resources>

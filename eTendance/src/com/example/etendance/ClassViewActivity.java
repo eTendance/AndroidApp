@@ -128,6 +128,14 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 		
 		displayClasses();
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		
+		new ClassListFiller().execute();
+	}
 
 	public void viewAttendance(ArrayList<StoreInfo> result) {
 		// Method for transitioning to ViewAttendanceActivity
@@ -224,13 +232,12 @@ public class ClassViewActivity extends Activity implements OnClickListener{
 		}
 		if (v == checkIn){
 			//move to check in activity
+			Intent checkInIntent = new Intent(getApplicationContext(), CheckInActivity.class);
+			startActivity(checkInIntent);
 			
-			//debugging message
-			Toast.makeText(getApplicationContext(),
-					"Moving to check in screen", Toast.LENGTH_SHORT)
-					.show();
 		}
 	}
+	
 	public void clearLoginInfo(){
 		//device no longer holds saved login info
 		SharedPreferences settings = getSharedPreferences("LoginInfo", 0);

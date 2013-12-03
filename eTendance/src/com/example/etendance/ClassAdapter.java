@@ -3,11 +3,12 @@ package com.example.etendance;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 
 public class ClassAdapter extends ArrayAdapter<StoreInfo>{
 	ArrayList<StoreInfo> names;
+	
 	public ClassAdapter(Context context, int list_item, int textEdit, ArrayList<StoreInfo> variables) {
 		super(context, list_item, textEdit, variables);
 	    names = variables;
@@ -30,8 +32,13 @@ public class ClassAdapter extends ArrayAdapter<StoreInfo>{
 		t.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				String tempClick = t.getText().toString();
-				Toast.makeText(getContext(), "Viewing absences for " + tempClick, Toast.LENGTH_SHORT).show();
+				Bundle bundle = new Bundle();
+				bundle.putString("classid", names.get(position).id);
+				bundle.putString("classname", names.get(position).name);				
+				
+				Intent intent = new Intent(getContext(), AttendanceViewActivity.class);
+				intent.putExtras(bundle);
+				v.getContext().startActivity(intent);
 			}
 		});
 		
@@ -40,9 +47,14 @@ public class ClassAdapter extends ArrayAdapter<StoreInfo>{
 			
 			@Override
 			public void onClick(View v) {
-				//view check in pin
+				Bundle bundle = new Bundle();
+				bundle.putString("classname", names.get(position).name);
+				bundle.putString("classid", names.get(position).id);
 				
-				Toast.makeText(getContext(), "Viewing Pin", Toast.LENGTH_SHORT).show();
+				Intent intent = new Intent(getContext(), PinViewActivity.class);
+				intent.putExtras(bundle);
+				v.getContext().startActivity(intent);
+				
 			}
 		});
 		

@@ -165,8 +165,6 @@ public class MainActivity extends Activity implements OnClickListener{
 		sign_in.setOnClickListener(this);
     }
 
-    
-    
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -182,7 +180,6 @@ public class MainActivity extends Activity implements OnClickListener{
 			finish();
 		}
 	}
-	
 	
 	
 	
